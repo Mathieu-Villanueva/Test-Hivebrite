@@ -7,9 +7,16 @@ class CustomAttributeForm < Reform::Form
   property :global_attribute, optional: true
 
   validates :name, presence: true
-  validates :value, presence: true, if: :field_required?, on: :update
+
+  validate :attribute_value
 
   private
+
+  def attribute_value
+    if field_required? && value.blank?
+      errors.add(:value, "is missing on #{model.name}") 
+    end
+  end
 
   def field_required?
     model&.required?
