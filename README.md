@@ -88,87 +88,107 @@ An admin can :
 
 - create a new global_attribute :
 
-  ```
+  ```ruby
     GlobalAttributes::Create.call(
       current_user: user_to_athorize,
       attribute_name: name_of_the_new_global,
-      required: true/false
+      required: boolean
     )
   ```
 
 - mark as optional :
-  ```
+  ```ruby
    GlobalAttributes::MarkAsOptional.call(
      current_user: user_to_athorize,
      attribute_name: name_of_the_new_global,
    )
   ```
 - mark as required :
-  ```
+  ```ruby
    GlobalAttributes::MarkAsRequired.call(
      current_user: user_to_athorize,
      attribute_name: name_of_the_new_global,
    )
   ```
 - mark as active :
-  ```
+  ```ruby
    GlobalAttributes::MarkAsActive.call(
      current_user: user_to_athorize,
      attribute_name: name_of_the_new_global,
    )
   ```
 - mark as inactive :
-  ```
+  ```ruby
    GlobalAttributes::MarkAsInactive.call(
      current_user: user_to_athorize,
      attribute_name: name_of_the_new_global,
    )
   ```
 
-### Admin manages a specific custom attribute :
+### Admin manages a specific Event/User custom attribute :
 
 An admin can :
 
-- mark as required a custom attribute on a user :
+- mark as required a custom attribute on a Event/User :
 
-  ```
+  ```ruby
     Customizables::MarkCustomAttributeAsRequired.call(
       current_user: use_to_authorize,
-      customizable: user,
+      customizable: event/user,
       attribute_name: name_of_the_custom_attribute
     )
   ```
 
-- mark as optional a custom attribute on a user :
+- mark as optional a custom attribute on a Event/User :
 
-  ```
+  ```ruby
     Customizables::MarkCustomAttributeAsOptional.call(
       current_user: use_to_authorize,
-      customizable: user,
+      customizable: event/user,
       attribute_name: name_of_the_custom_attribute
     )
   ```
 
 - create a new custom attribute for a specific Event/User :
 
-  ```
+  ```ruby
     Customizables::AddCustomAttribute.call(
       current_user: use_to_authorize,
-      customizable: user,
+      customizable: event/user,
       name: name_of_the_custom_attribute,
-      required: true/false,
+      required: boolean,
       value: value_of_the_custom_attribute
     )
   ```
 
-- update the value for a custom attribute :
-  ```
+- update the value for a custom attribute on a specific Event/User:
+  ```ruby
     Customizables::UpdateCustomAttribute.call(
       attribute_name: attribute_name,
-      customizable: customizable,
+      customizable: event/user,
       new_value: value,
       current_user: current_user
     )
   ```
 
-### aze
+### User fills in a custom attribute on the signup form
+
+This is accomplish by `Users::SignUp.call(params)`
+
+`params` must have this shape :
+
+```ruby
+  {
+    email: STRING,
+    attributes: [
+      { # global attribute
+        name: STRING,
+        value: STRING,
+      },
+      { # global attribute
+        name: STRING,
+        value: STRING,
+      }
+    ]
+  }
+```
