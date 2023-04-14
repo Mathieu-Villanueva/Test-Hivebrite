@@ -92,8 +92,7 @@ This code is meant to be use with actors, which are services, to perform actions
 
 ### Admin manages the global User custom attributes
 
-This is possible with the actors in :
-`app/actors/global_attributes`
+This is possible with the actors in : `app/actors/global_attributes`
 
 An admin can :
 
@@ -142,6 +141,8 @@ If a global attribute is mark as required, users need to fill it when signing up
 
 ### Admin manages a specific Event/User custom attribute :
 
+This is possible with the actors in : `app/actors/customizables/`
+
 An admin can :
 
 - mark as required a custom attribute on a Event/User :
@@ -188,7 +189,9 @@ An admin can :
 
 ### User fills in a custom attribute on the signup form
 
-This is accomplish by `Users::SignUp.call(params)` with the help of `UserForm`
+This is possible with the actors in : `app/actors/users/`
+
+Specifically, `Users::SignUp.call(params)` with the help of `UserForm`
 
 `params` must have this shape :
 
@@ -211,6 +214,8 @@ This is accomplish by `Users::SignUp.call(params)` with the help of `UserForm`
 `attributes` must contain a list of, at least, all the active && required `GlobalAttribute`
 
 ### User fills in a custom attribute on an Event Registration form
+
+This is possible with the actors in `app/actors/events/`
 
 This is accomplish by `Event::Register` with `RegistrationForm`
 
