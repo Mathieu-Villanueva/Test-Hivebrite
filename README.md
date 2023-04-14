@@ -85,28 +85,43 @@ This is possible with the actors in :
 An admin can :
 
 - mark as required a custom attribute on a user :
+
   ```
     Customizables::MarkCustomAttributeAsRequired.call(
-    current_user: use_to_authorize,
-    customizable: user,
-    attribute_name: name_of_the_custom_attribute
+      current_user: use_to_authorize,
+      customizable: user,
+      attribute_name: name_of_the_custom_attribute
   )
   ```
+
 - mark as optional a custom attribute on a user :
+
   ```
-   Customizables::MarkCustomAttributeAsOptional.call(
-   current_user: use_to_authorize,
-   customizable: user,
-   attribute_name: name_of_the_custom_attribute
-  )
+    Customizables::MarkCustomAttributeAsOptional.call(
+      current_user: use_to_authorize,
+      customizable: user,
+      attribute_name: name_of_the_custom_attribute
+    )
   ```
+
 - create a new custom attribute for a specific Event/User :
+
   ```
-  Customizables::AddCustomAttribute.call(
-  current_user: use_to_authorize,
-  customizable: user,
-  name: name_of_the_custom_attribute,
-  required: true/false,
-  value: value_of_the_custom_attribute
-  )
+    Customizables::AddCustomAttribute.call(
+      current_user: use_to_authorize,
+      customizable: user,
+      name: name_of_the_custom_attribute,
+      required: true/false,
+      value: value_of_the_custom_attribute
+    )
+  ```
+
+- update the value for a custom attribute :
+  ```
+    Customizables::UpdateCustomAttribute.call(
+      attribute_name: attribute_name,
+      customizable: customizable,
+      new_value: value,
+      current_user: current_user
+    )
   ```
