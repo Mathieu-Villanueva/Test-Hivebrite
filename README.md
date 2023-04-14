@@ -43,7 +43,11 @@ I didn't have the time to handle signin so i don't have a real current_user.
 In the actors, current_user input is needed.
 
 ```
-Users::UpdateEmail.call(current_user: 'The user to authorize', email: 'The email we want to update the user with', user: 'The user we want to update')
+Users::UpdateEmail.call(
+  current_user: 'The user to authorize',
+  email: 'The email we want to update the user with',
+  user: 'The user we want to update'
+)
 ```
 
 ## Schema
