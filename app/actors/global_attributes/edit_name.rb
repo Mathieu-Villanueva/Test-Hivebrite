@@ -13,7 +13,7 @@ module GlobalAttributes
       raise_attribute_does_not_exist_error unless global_attribute
 
       edit_name
-      edit_custom_attributes
+      edit_custom_attributes_names
     end
 
     private
@@ -30,7 +30,7 @@ module GlobalAttributes
       global_attribute.update(name: new_name)
     end
 
-    def edit_custom_attributes
+    def edit_custom_attributes_names
       global_attribute.custom_attributes.each do |custom_attribute|
         custom_attribute.update(name: new_name)
       end
