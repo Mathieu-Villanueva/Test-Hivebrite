@@ -6,6 +6,8 @@ module Events
     input :name, type: String
     input :description, type: String, allow_nil: true
 
+    output :event, type: Event
+
     def call
       if not_authorized?
         raise_authorization_error
@@ -21,7 +23,7 @@ module Events
     end
 
     def create_event
-      Event.create!(name: name, description: description)
+      result.event = Event.create!(name: name, description: description)
     end
   end
 end
