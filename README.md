@@ -1,6 +1,6 @@
 # README
 
-## Test prompts
+## Use cases
 
 Develop a functionality allowing administrators to customize:
 
@@ -59,25 +59,25 @@ Tables :
 - CustomAttribute
 - GlobalAttribute
 
-Global attributes are what defines the signup form.
+`Global attributes` are what defines the signup form.
 
 - name :
 - required : Determines if a user needs to provide a value for this global attribute
 - active : Determines if a global attribute needs to appears on a user form (profile / signup)
 - custom_attributes : This is the list of custom_attributes linked to this global and that are associated with a user
 
-Custom attributes can be associated with a User OR an Event, which are refered as `customizable`.
-They can also be linked to a global attribute
+`Custom attributes` can be associated with a User OR an Event, which are refered as `customizable`.
+They can also be linked to a `global attribute`
 
 - name
 - value
-- required
-- customizable
+- required : Determines if a user needs to provide a value for this attribute
+- customizable : A user or an event
 - global_attribute (is optional)
 
 ## How to use this code :
 
-This code is meant to be use with actors, which are services, do perform actions
+This code is meant to be use with actors, which are services, to perform actions
 
 ### Admin manages the global User custom attributes
 
@@ -124,6 +124,10 @@ An admin can :
      attribute_name: name_of_the_new_global,
    )
   ```
+
+Changing or adding a global attribute will affect the SignUp form.
+The Form looks for Global attributes that are active to allow users to fill them.
+If a global attribute is mark as required, users need to fill it when signing up.
 
 ### Admin manages a specific Event/User custom attribute :
 
@@ -173,7 +177,7 @@ An admin can :
 
 ### User fills in a custom attribute on the signup form
 
-This is accomplish by `Users::SignUp.call(params)`
+This is accomplish by `Users::SignUp.call(params)` with the help of `UserForm`
 
 `params` must have this shape :
 
@@ -192,3 +196,37 @@ This is accomplish by `Users::SignUp.call(params)`
     ]
   }
 ```
+
+`attributes` must contain a list of, at least, all the active && required `GlobalAttribute`
+
+### User fills in a custom attribute on an Event Registration form
+
+This is accomplish by `Event::Register` with `RegistrationForm`
+
+It takes these inputs :
+
+```ruby
+ Events::Register.call(
+   current_user: user_to_authorize,
+   event_name: name_of_the_event,
+   usern_name: name_of_the_user,
+   event_attributes: list_of_values_for_completing_the_form
+ )
+```
+
+`event_attributes` must have this shape :
+
+```ruby
+  [
+    { # first event custom attribute
+      name: name_of_the_custom_attribute,
+      value: value_for_this_field,
+    }
+  ]
+```
+
+Users needs to fill, at least, all the custom_Attributes marked as required.
+
+### User reads his custom attributes on his profile
+
+This is accomplish by `Customizables::GetCustomizableAttributes`
