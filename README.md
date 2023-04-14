@@ -237,6 +237,9 @@ It takes these inputs :
     { # first event custom attribute
       name: name_of_the_custom_attribute,
       value: value_for_this_field,
+    },
+    {
+      # second event...
     }
   ]
 ```
