@@ -77,10 +77,55 @@ They can also be linked to a global attribute
 
 ## How to use this code :
 
-- Admin manages the global User custom attributes
+This code is meant to be use with actors, which are services, do perform actions
+
+### Admin manages the global User custom attributes
 
 This is possible with the actors in :
 `app/actors/global_attributes`
+
+An admin can :
+
+- create a new global_attribute :
+
+  ```
+    GlobalAttributes::Create.call(
+      current_user: user_to_athorize,
+      attribute_name: name_of_the_new_global,
+      required: true/false
+    )
+  ```
+
+- mark as optional :
+  ```
+   GlobalAttributes::MarkAsOptional.call(
+     current_user: user_to_athorize,
+     attribute_name: name_of_the_new_global,
+   )
+  ```
+- mark as required :
+  ```
+   GlobalAttributes::MarkAsRequired.call(
+     current_user: user_to_athorize,
+     attribute_name: name_of_the_new_global,
+   )
+  ```
+- mark as active :
+  ```
+   GlobalAttributes::MarkAsActive.call(
+     current_user: user_to_athorize,
+     attribute_name: name_of_the_new_global,
+   )
+  ```
+- mark as inactive :
+  ```
+   GlobalAttributes::MarkAsInactive.call(
+     current_user: user_to_athorize,
+     attribute_name: name_of_the_new_global,
+   )
+  ```
+
+### Admin manages a specific custom attribute :
 
 An admin can :
 
@@ -91,7 +136,7 @@ An admin can :
       current_user: use_to_authorize,
       customizable: user,
       attribute_name: name_of_the_custom_attribute
-  )
+    )
   ```
 
 - mark as optional a custom attribute on a user :
@@ -125,3 +170,5 @@ An admin can :
       current_user: current_user
     )
   ```
+
+### aze
