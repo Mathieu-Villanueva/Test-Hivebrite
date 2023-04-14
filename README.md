@@ -249,3 +249,15 @@ Users needs to fill, at least, all the custom_Attributes marked as required.
 ### User reads his custom attributes on his profile
 
 This is accomplish by `Customizables::GetCustomizableAttributes`
+
+### Specs
+
+Most of the Actors are tested with Rspec and can be found in the `/spec/actors` folder.
+
+### Possible enhancements
+
+Unfortunately, I didn't have time to complete all the features I had in mind for the Registration form and User profile prompts.
+
+For the Registration form, in addition to the current functionality of printing a success message upon completion, I had planned to add a feature that would add the user to a list upon successful form submission. To accomplish this, I would have created a new table called Attendee, which would belong to both an event and a user. This table would have stored all the custom attribute values filled by the user during registration.
+
+Regarding the User profile prompt, I regret that I wasn't able to implement it completely. However, since we already have the Userform and all the logic is already complete there, it would not have been difficult to do so.
