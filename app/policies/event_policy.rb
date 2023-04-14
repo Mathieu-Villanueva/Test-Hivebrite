@@ -1,8 +1,4 @@
 class EventPolicy < ApplicationPolicy
-  def show?
-    true
-  end
-
   def create?
     admin?
   end
@@ -13,5 +9,11 @@ class EventPolicy < ApplicationPolicy
 
   def update?
     admin?
+  end
+
+  def register?
+    return false if user.email.blank?
+
+    true
   end
 end
