@@ -1,5 +1,7 @@
 module Events
   class Update < Actor
+    include FailuresConcern
+
     input :current_user, type: User
     input :description, type: String, allow_nil: true
     input :event, type: Event
@@ -17,10 +19,6 @@ module Events
 
     def not_authorized?
       !EventPolicy.new(current_user, event).update?
-    end
-
-    def raise_authorization_error
-      fail!(error: 'You are not authorized to do this action')
     end
 
     def update_event
