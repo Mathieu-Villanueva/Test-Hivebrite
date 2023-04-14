@@ -1,24 +1,75 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Test prompts
 
-Things you may want to cover:
+Develop a functionality allowing administrators to customize:
 
-* Ruby version
+- the User profile
+- the User signup form
+- an Event Registration form
 
-* System dependencies
+In order to focus on the important parts, no need to develop a UI. The code will be run through the tests, and possibly through the console. We want to focus on models, possibly service classes with clean interfaces, but not controllers/views.
 
-* Configuration
+Use cases that the service must support:
 
-* Database creation
+- Admin manages the global User custom attributes
+- Admin manages a specific Event’s custom attributes
+- Admin makes a custom attribute optional/required on the User profile
+- Admin makes a custom attribute optional/required on the User signup form
+- Admin makes a custom attribute optional/required on a specific Event Registration form
+- User fills in a custom attribute on his profile
+- User fills in a custom attribute on the signup form
+- User fills in a custom attribute on an Event Registration form
+- User reads his custom attributes on his profile
+- Admin reads an Event registration’s custom attributes
 
-* Database initialization
+Custom attributes types supported:
 
-* How to run the test suite
+- Text
+- Boolean
 
-* Services (job queues, cache servers, search engines, etc.)
+## Description
 
-* Deployment instructions
+This code allows to answer most of the prompts above.
+This are the gems I used :
 
-* ...
+- FactoryBot : https://github.com/thoughtbot/factory_bot (to help with specs)
+- Pundit : https://github.com/varvet/pundit (to help with authorizations)
+- Reform:Form : https://trailblazer.to/2.1/docs/reform#reform-overview (to handle forms)
+- ServiceActor : https://github.com/sunny/actor (to handle services)
+- Rspec : for the specs
+
+## Schema
+
+Tables :
+
+- Event
+- User
+- CustomAttribute
+- GlobalAttribute
+
+Global attributes are what defines the signup form.
+
+- name :
+- required : Determines if a user needs to provide a value for this global attribute
+- active : Determines if a global attribute needs to appears on a user form (profile / signup)
+- custom_attributes : This is the list of custom_attributes linked to this global and that are associated with this global
+
+Custom attributes can be associated with a User OR an Event, which are refered as `customizable`.
+They can also be linked to a global attribute
+
+- name
+- value
+- required
+- customizable
+- global_attribute (is optional)
+
+## How to use this code :
+
+- Admin manages the global User custom attributes
+
+This is possible with the actors in :
+app/actors/customizables
+
+An admin can for example mark as required a custom attribute :
+`Customizables::MarkCustomAttributeAsRequired.call(current_user)
