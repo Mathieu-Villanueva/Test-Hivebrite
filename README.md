@@ -64,7 +64,7 @@ Global attributes are what defines the signup form.
 - name :
 - required : Determines if a user needs to provide a value for this global attribute
 - active : Determines if a global attribute needs to appears on a user form (profile / signup)
-- custom_attributes : This is the list of custom_attributes linked to this global and that are associated with this global
+- custom_attributes : This is the list of custom_attributes linked to this global and that are associated with a user
 
 Custom attributes can be associated with a User OR an Event, which are refered as `customizable`.
 They can also be linked to a global attribute
