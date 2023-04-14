@@ -78,5 +78,31 @@ They can also be linked to a global attribute
 This is possible with the actors in :
 `app/actors/global_attributes`
 
-An admin can for example mark as required a custom attribute :
-`Customizables::MarkCustomAttributeAsRequired.call(current_user, global_attribute)`
+An admin can :
+
+- mark as required a custom attribute on a user :
+  ```
+    Customizables::MarkCustomAttributeAsRequired.call(
+    current_user: use_to_authorize,
+    customizable: user,
+    attribute_name: name_of_the_custom_attribute
+  )
+  ```
+- mark as optional a custom attribute on a user :
+  ```
+   Customizables::MarkCustomAttributeAsOptional.call(
+   current_user: use_to_authorize,
+   customizable: user,
+   attribute_name: name_of_the_custom_attribute
+  )
+  ```
+- create a new custom attribute for a specific Event/User :
+  ```
+  Customizables::AddCustomAttribute.call(
+  current_user: use_to_authorize,
+  customizable: user,
+  name: name_of_the_custom_attribute,
+  required: true/false,
+  value: value_of_the_custom_attribute
+  )
+  ```
