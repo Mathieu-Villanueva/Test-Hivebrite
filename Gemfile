@@ -33,3 +33,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'pundit'
 gem "service_actor", "~> 3.6"
+gem "reform", "~> 2.6.2"
+gem "reform-rails"
