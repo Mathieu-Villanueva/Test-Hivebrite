@@ -76,7 +76,7 @@ They can also be linked to a global attribute
 - Admin manages the global User custom attributes
 
 This is possible with the actors in :
-app/actors/customizables
+`app/actors/global_attributes`
 
 An admin can for example mark as required a custom attribute :
-`Customizables::MarkCustomAttributeAsRequired.call(current_user)
+`Customizables::MarkCustomAttributeAsRequired.call(current_user, global_attribute)`
